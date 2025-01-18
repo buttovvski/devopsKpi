@@ -1,12 +1,12 @@
 # debian/control
-Source: cppproject
+Source: cppfuncaproject
 Section: utils
 Priority: optional
 Maintainer: Your Name <yaroslavbut1@gmail.com>
 Build-Depends: debhelper (>= 9), autotools-dev
 Standards-Version: 4.5.0
 
-Package: cppproject
+Package: cppfuncaproject
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Example C++ program

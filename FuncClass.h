@@ -3,8 +3,8 @@
 
 class FuncClass {
 public:
-    // Function to calculate a trigonometric function, placeholder return 0
-    double FuncA();
+    // Function to calculate the sum of the first n terms of e^x
+    double FuncA(int n, double x);
 };
 
 #endif // FUNC_CLASS_H

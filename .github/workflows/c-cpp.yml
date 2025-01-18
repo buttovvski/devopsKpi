@@ -2,9 +2,9 @@ name: Build C++ Program
 
 on:
   push:
-    branches: [branchAutomake]
+    branches: [branchAutoPackage]
   pull_request:
-    branches: [branchAutomake]
+    branches: [branchAutoPackage]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y g++ make
+          sudo apt-get install -y g++ make autoconf automake devscripts debhelper build-essential
 
       - name: Run Autoreconf
         run: autoreconf --install
@@ -27,13 +27,14 @@ jobs:
       - name: Compile Program
         run: make
 
-      - name: Build Tarball Distribution
-        run: |
-          make dist
-          ls -l *.tar.gz
+      - name: Build Debian Package
+        run: dpkg-buildpackage -us -uc
 
-      - name: Upload Artifact
+      - name: Move Debian Package
+        run: mv ../cppproject_1.0-1_amd64.deb .
+
+      - name: Upload Debian Package
         uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: "*.tar.gz"
+          name: cppproject-deb
+          path: cppproject_1.0-1_amd64.deb

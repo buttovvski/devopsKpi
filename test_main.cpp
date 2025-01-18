@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cassert>
+#include <chrono>
+#include <vector>
+#include <algorithm>
 #include "FuncClass.h"
 
 void testFuncA() {
@@ -31,9 +34,35 @@ void testFuncA() {
     std::cout << "Test case 5 passed." << std::endl;
 }
 
+void testLongComputation() {
+    FuncClass calculator;
+
+    std::vector<double> aValues;
+    aValues.reserve(2000000); // Pre-allocate memory
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    // Generate values using FuncA with different x inputs
+    for (int i = 0; i < 2000000; i++) {
+        double x = i * 0.001; // Increment x by small amounts
+        aValues.push_back(calculator.FuncA(5, x)); // Use 5 terms for Taylor series
+    }
+
+    for (int i = 0; i < 500; i++) {
+        std::sort(begin(aValues), end(aValues));
+    }
+
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto int_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+
+    int iMS = int_ms.count();
+    std::cout << "Long computation test took " << iMS << " milliseconds." << std::endl;
+}
+
 int main() {
     std::cout << "Starting tests..." << std::endl;
     testFuncA();
+    testLongComputation();
     std::cout << "All tests passed." << std::endl;
     return 0;
 }

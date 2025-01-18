@@ -1,0 +1,27 @@
+Starting tests...
+Running Test case 1
+Test case 1 passed.
+Running Test case 2
+Term 0: 1
+Result: 1
+Test case 2 passed.
+Running Test case 3
+Term 0: 1
+Term 1: 1
+Result: 2
+Test case 3 passed.
+Running Test case 4
+Term 0: 1
+Term 1: 1
+Term 2: 0.5
+Result: 2.5
+Test case 4 passed.
+Running Test case 5
+Term 0: 1
+Term 1: 1
+Term 2: 0.5
+Term 3: 0.166667
+Result: 2.66667
+Test case 5 passed.
+All tests passed.
+PASS test_func (exit status: 0)

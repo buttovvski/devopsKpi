@@ -2,9 +2,9 @@ name: Build and Test C++ Program
 
 on:
   push:
-    branches: [branchHTTPserver]
+    branches: [branchHTTPservMutli]
   pull_request:
-    branches: [branchHTTPserver]
+    branches: [branchHTTPservMutli]
 
 jobs:
   build:

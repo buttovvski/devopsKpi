@@ -16,12 +16,7 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y g++ make autoconf automake build-essential libgtest-dev
-          sudo apt-get install -y cmake
-          cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
-          sudo make
-          sudo cp *.a /usr/lib
+          sudo apt-get install -y g++ make autoconf automake build-essential
 
       - name: Run Autoreconf
         run: autoreconf --install
@@ -32,5 +27,5 @@ jobs:
       - name: Compile Program
         run: make
 
-      - name: Run tests
+      - name: Run Tests
         run: make check

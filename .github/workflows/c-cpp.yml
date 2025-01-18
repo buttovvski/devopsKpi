@@ -2,9 +2,9 @@ name: Build C++ Program
 
 on:
   push:
-    branches: [branchAutoMake]
+    branches: [branchAutomake]
   pull_request:
-    branches: [branchAutoMake]
+    branches: [branchAutomake]
 
 jobs:
   build:

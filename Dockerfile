@@ -6,6 +6,7 @@ RUN ./configure
 RUN make
 
 FROM alpine:latest
+RUN apk add --no-cache libstdc++ libgcc
 WORKDIR /home/optimaserver
 COPY --from=build /home/optimaserver/main /usr/local/bin/main
 ENTRYPOINT ["/usr/local/bin/main"]

@@ -57,7 +57,8 @@ update_containers() {
 }
 
 check_and_scale() {
-    for container in "${CONTAINERS[@]}"; do
+    for i in "${!CONTAINERS[@]}"; do
+        local container=${CONTAINERS[$i]}
         local status=$(check_container_status "$container")
         
         if [[ $container == "service1" && $status != "running" ]]; then
@@ -68,10 +69,13 @@ check_and_scale() {
             local usage2=$(get_cpu_usage "$container")
             
             if (( $(echo "$usage1 > 80" | bc -l) && $(echo "$usage2 > 80" | bc -l) )); then
-                local next_container=${CONTAINERS[$(( ${!CONTAINERS[@]} + 1 ))]}
-                if [[ $(check_container_status "$next_container") != "running" ]]; then
-                    log_message "$container is overloaded. Starting $next_container"
-                    manage_container "$next_container" "start"
+                local next_index=$((i + 1))
+                if [[ $next_index -lt ${#CONTAINERS[@]} ]]; then
+                    local next_container=${CONTAINERS[$next_index]}
+                    if [[ $(check_container_status "$next_container") != "running" ]]; then
+                        log_message "$container is overloaded. Starting $next_container"
+                        manage_container "$next_container" "start"
+                    fi
                 fi
             elif (( $(echo "$usage1 < 10" | bc -l) && $(echo "$usage2 < 10" | bc -l) )); then
                 log_message "$container is idle. Stopping it..."
